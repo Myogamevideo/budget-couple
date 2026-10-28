@@ -11,7 +11,7 @@ Clair est une application web locale qui importe un classeur Excel de budget et 
 - Quand une modification change le fonctionnement, les règles de calcul, les données acceptées ou les commandes d'utilisation, mettre à jour ce fichier et la documentation utilisateur pertinente (`README.md`) dans le même changement. Pour chaque tâche de modification du projet, vérifier si `AGENTS.md` doit être actualisé ; ne pas le laisser contredire le code.
 - Ne pas ajouter de dépendance sans nécessité. Ne jamais envoyer les classeurs, relevés bancaires ou autres données financières à un service externe.
 - Utiliser `npm run build` pour vérifier une modification de code quand c'est approprié. Node.js 18 ou supérieur est requis ; Node.js 20 LTS est recommandé. Les scripts disponibles sont `npm run dev`, `npm run build` et `npm run preview`.
-- Le site est déployé sur GitHub Pages par `.github/workflows/pages.yml` lors des push sur `main`. `vite.config.js` fixe le préfixe `/budget-couple/` uniquement dans GitHub Actions ; préserver la compatibilité avec la racine locale pour le développement.
+- Le site est compilé avec `npm ci` et `npm run build`, puis le dossier `dist/` est déployé sur GitHub Pages par `.github/workflows/pages.yml` lors des push sur `main`. Dans les paramètres Pages, la source doit être **GitHub Actions**. `vite.config.js` fixe le préfixe `/budget-couple/` uniquement dans GitHub Actions ; préserver la compatibilité avec la racine locale pour le développement.
 - Ne jamais ajouter de classeurs, relevés ou données financières personnelles au dépôt ou à l'artefact Pages. Le site publié peut être accessible publiquement, même si le dépôt est privé.
 
 ## Import des classeurs

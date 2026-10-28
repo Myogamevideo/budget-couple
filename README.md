@@ -27,24 +27,9 @@ Pour générer la version de production, lancez `npm run build`. Pour la prévis
 
 ## Publier le site sur GitHub Pages
 
-Le dépôt `Myogamevideo/budget-couple` est configuré pour publier automatiquement le site avec GitHub Actions à chaque push sur `main`. Vite utilise `/budget-couple/` comme chemin de base sur GitHub Pages et `/` en développement local.
+Le workflow `.github/workflows/pages.yml` compile le site avec Vite (`npm ci`, puis `npm run build`) et publie le dossier `dist/` avec GitHub Pages à chaque push sur `main`. Pour l’activer, ouvrez **Settings → Pages** et choisissez **GitHub Actions** comme source de déploiement. Vite utilise `/budget-couple/` comme chemin de base sur GitHub Pages et `/` en développement local. Le workflow « Simple workflow » qui ne fait que publier les fichiers du dépôt n’est pas adapté : il ne compile pas l’application.
 
-Le dossier de travail actuel n'a pas de dépôt Git fonctionnel. Pour publier ses fichiers sans écraser ce dossier, clonez le dépôt vide dans un nouveau dossier, puis copiez-y le projet (remplacez `/chemin/vers/Clair/` par le chemin local du dossier contenant `src/` et `package.json`) :
-
-```sh
-git clone https://github.com/Myogamevideo/budget-couple.git budget-couple-publish
-rsync -av --exclude='.git' --exclude='node_modules' --exclude='dist' /chemin/vers/Clair/ budget-couple-publish/
-cd budget-couple-publish
-npm ci
-npm run build
-git add .
-git commit -m "Initialise Clair budget dashboard"
-git push -u origin main
-```
-
-Pour le dépôt actuellement privé, rendez-le public dans **Settings → General → Danger Zone → Change repository visibility**. Cette étape publie le code source du dépôt ; vérifiez qu'il ne contient aucun classeur, relevé ou autre donnée financière. Dans GitHub, ouvrez ensuite **Settings → Pages**, puis choisissez **GitHub Actions** comme source de déploiement. Après le premier déploiement réussi, le site sera disponible à l'adresse `https://myogamevideo.github.io/budget-couple/` ; les déploiements suivants sont déclenchés automatiquement par les push sur `main`.
-
-Le dépôt cible est privé. GitHub Pages n'autorise l'utilisation d'un dépôt privé que selon le forfait GitHub du propriétaire ; avec GitHub Free, le dépôt doit être public. Un site Pages est publiquement accessible sur Internet même si son dépôt source est privé, sauf publication privée réservée à GitHub Enterprise Cloud. Avant d'activer Pages, vérifiez que le dépôt ne contient que le code et aucun classeur, relevé ou autre donnée financière. Les fichiers Excel importés dans Clair sont analysés localement dans le navigateur et ne sont pas transmis au site.
+Après un déploiement réussi, le site est disponible à l’adresse `https://myogamevideo.github.io/budget-couple/`. Le site publié est accessible publiquement sur Internet ; vérifiez que le dépôt et l’artefact Pages ne contiennent aucun classeur, relevé ou autre donnée financière. Les fichiers Excel importés dans Clair sont analysés localement dans le navigateur et ne sont pas transmis au site.
 
 ## Données prises en charge
 
